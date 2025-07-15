@@ -1,0 +1,80 @@
+{% extends 'users/base.html' %}
+{% load mathfilters %}
+{% load static %}
+
+
+{% block body %}
+{% for message in messages %}
+<div class=" shadow-md rounded-3xl" >
+     <p class="bg-green-500 text-white font-semibold py-2 px-4  ">{{message}}</p>
+</div>
+   
+{% endfor%}
+    <div class="flex mt-5 p-10 justify-center ">
+        <h1 class="text-3xl font-medium mb-2 text-gray-500 ">👋 Welcome  {{request.user | capfirst }} </h1>
+    </div>
+    <div class="grid mx-60 p-10 grid-cols-1 ">
+        {% for post in posts %}
+        <!-- card starts here -->
+         <a href="#">
+            <div class="bg-gray-200 my-3 rounded-t-lg shadown-lg border-l-2 border-r-2 border-gray-200 ">
+                <div class="user-container flex p-2">
+                    <img src="{{post.user.profile.photo.url}}" alt="" class="h-10 w-10 rounded-full">
+                    <div class="mx-2 my-2 font-bold"><span class="text-indigo-500">{{post.user | capfirst }}</span></div>
+                </div>
+                <div class=" flex justify-center rounded overflow-hidden w-[470px] h-[470px] bg-white ">
+                    <img src="{{post.image.url}}" height="200px" width="400px">
+                </div>
+            </div>
+            <div class=" shadow-md rounded-b-md">
+                <div >
+                    <div class="icon-container  flex gap-3 p-1">
+                        <a id="{{ post.id }}" class="btn-like">
+                            {% if logged_user in post.liked_by.all %}
+                            <img class="w-5 h-5 " src="{% static 'users/images/redlike.png' %}">
+                            {% else %}
+                            <img class="w-5 h-5 " src="{% static 'users/images/like.png' %}">
+                            {% endif %}
+                        </a>
+                        
+                        <img class="w-5 h-5 " src="{% static 'users/images/comment.png' %}">
+                        <img class="w-5 h-5 " src="{% static 'users/images/share.png' %}">
+                        <!-- <img class="w-5 h-5 " src="{% static 'users/images/like.png' %}"> -->
+                    </div>
+                </div>
+                <div class="font-sans ml-3 font-normal">
+                    {% if post.liked_by.count < 1  %}
+                    {% elif post.liked_by.count == 1 %}
+                        {{ post.liked_by.first }} Liked this
+                    {% elif post.liked_by.count > 1 %}
+                        {{post.liked_by.first }} & {{ post.liked_by.count | sub:1 }} Other Likes this
+                    {% endif %}
+                </div>
+                <div class="px-1 py-4">
+                    <div class="font-bold text-xl mb-2">{{post.title}}</div>
+                    <p class="text-gray-700 text-base">{{post.caption}}</p>
+
+                </div>
+            </div> 
+         </a>
+         <br>
+        <!-- card ends here -->
+        {% endfor %}     
+    </div>
+
+<script type="text/javascript">
+    
+    window.CSRF_TOKEN = "{{ csrf_token }}"
+    $(document).on('click','.btn-like',function(){
+        var post_id = this.id
+        $.ajax({
+            method:"POST",
+            url: '/posts/like',
+            data:{post_id:post_id,csrfmiddlewaretoken:window.CSRF_TOKEN}
+        })
+        window.location.href="http://127.0.0.1:8000/posts/feed/"
+    })
+
+</script>
+
+{% endblock %}

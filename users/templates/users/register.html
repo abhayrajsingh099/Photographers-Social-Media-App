@@ -1,0 +1,50 @@
+{% extends 'users/base.html' %}
+
+
+{% block body %}
+<div class="justify-evenly flex"><h1 class="text-2xl m-5 font-bold">🧑 Register User</h1></div>
+
+<div class=" justify-center flex ">
+    <form method="POST" class="bg-white shadow-lg  m-5 w-2/5 rounded px-8 pt-6 pb-8 mb-4 hover:shadow-2xl">
+    {% csrf_token %}
+    <div class="mb-2">
+        <label class="block text-gray-700 text-sm font-bold mb-2 ">Email</label>
+        <div class="shadow text-gray-700 appearance-none border hover:shadow-green-600  py-2 px-3 mr-10">{{ user_form.email }}</div>
+        {% if user_form.email.errors %}
+        <p class="text-red-500 text-sm">{{ user_form.email.errors.0 }}</p> <!--( errors.0 [0 is like an index] )Shows just the first message-->
+        {% endif %}
+    </div>
+    <div class="mb-2">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+        <div class="shadow text-gray-700 appearance-none border rounded py-2 px-3 mr-10">{{ user_form.username }}</div>
+        {% if user_form.username.errors %}
+        <p class="text-red-500 text-sm">{{ user_form.username.errors.0 }}</p>
+        {% endif %}
+    </div>
+    <div class="mb-2">
+        <label class="block text-gray-700 text-sm font-bold mb-2">First name</label>
+        <div class="shadow text-gray-700 appearance-none border rounded py-2 px-3 mr-10">{{ user_form.first_name }}</div>
+    </div>
+    <div class="mb-2">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+        <div class="shadow text-gray-700 appearance-none border rounded py-2 px-3 mr-10">{{ user_form.password }}</div>
+    </div>
+    
+    <div class="mb-2">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
+        <div class="shadow text-gray-700 appearance-none border rounded py-2 px-3 mr-10">{{ user_form.password2 }}</div>
+        {% if user_form.password2.errors %}
+        <p class="text-red-500 text-sm">{{ user_form.password2.errors.0 }}</p>
+        {% endif %}
+    </div>
+    <div class="justify-evenly flex">
+        <button class="text-white bg-green-600 px-5 py-2" type="submit">Register</button>
+    </div>
+    </form>
+</div>
+
+
+{% endblock %}
+
+
+

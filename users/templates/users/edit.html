@@ -1,0 +1,47 @@
+{% extends 'users/base.html' %}
+{% block body %}
+<div class="flex ml-5 mt-4">
+    <h2 class="text-center mt-2 mb-2 font-bold text-xl ">👨🏻 Edit Profile</h2>
+</div>
+
+<div class=" flex ml-6 mt-4">
+<form method="POST" enctype="multipart/form-data" class="">
+    {% csrf_token %}
+    <div class="mb-2">
+        <label class="block text-grey-700 text-sm font-bold mb-2">First name:</label>
+        <div class="shadow appearance-none border rounded py-2 px-3 mr-10 text-grey-700">
+            {{user_form.first_name}}
+        </div>
+    </div>
+    <div class="mb-2">
+        <label class="block text-grey-700 text-sm font-bold mb-2">Last name:</label>
+        <div class="shadow appearance-none border rounded py-2 px-3 mr-10 text-grey-700">
+            {{user_form.last_name}}
+        </div>
+    </div>
+    <div class="mb-2">
+        <label class="block text-grey-700 text-sm font-bold mb-2">Email:</label>
+        <div class="shadow appearance-none border rounded py-2 px-3 mr-10 text-grey-700">
+            {{user_form.email}}
+        </div>
+    </div>
+    <div class="mb-2">
+        <label class="block text-grey-700 text-sm font-bold mb-2">Photo:</label>
+        <div class="shadow appearance-none border rounded py-2 px-3 mr-10 text-grey-700">
+            {{profile_form.photo}}
+        </div>
+    </div>
+    <div class="ml-1 flex">
+        <div class="mr-4 flex">
+            <button type="submit" class="bg-green-600 text-white py-2 px-5 my-5 ">Save</button>
+        </div>
+        <div class="">
+            <button type="submit" class="bg-indigo-600 text-white py-2 px-2 my-5 "><a href="{% url 'password_change' %}">Change password</a></button>
+        </div>
+    </div>
+    
+    
+    
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'users/base.html' %}
+
+
+{% block body %}
+{% for message in messages %}
+    {% if message.tags == 'error' %}
+    <p class="bg-red-500 text-white font-semibold py-2 px-4  shadow-md">{{message}}</p>
+    {% else %}
+    <p class="bg-green-500 text-white font-semibold py-2 px-4  shadow-md">{{message}}</p>
+    {% endif %}
+{% endfor%}
+
+<div class="justify-center flex"><h1 class="text-2xl m-5 font-bold">🧑 Login User</h1></div>
+
+<div class=" justify-center flex ">
+    <form method="POST" class="bg-white shadow-lg  m-5 w-2/5 rounded px-8 pt-6 pb-8 mb-4 hover:shadow-2xl ">
+    {% csrf_token %}
+    <div class="mb-2">
+        <label class="block text-gray-700 text-sm font-bold mb-2 ">Username</label>
+        <div class="shadow text-gray-700 appearance-none border hover:shadow-green-600  py-2 px-3 mr-10">{{ form.username }}</div>
+    </div>
+    <div class="mb-2">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+        <div class="shadow text-gray-700 appearance-none border rounded py-2 px-3 mr-10">{{ form.password }}</div>
+    </div>
+    
+    <div>
+        <a class="text-blue-500 font-medium" href="{% url 'password_reset' %}">Forget Password?</a>
+    </div>
+    <div class="justify-center flex">
+        <button class="text-white bg-green-600 px-5 py-2" type="submit">Login</button>
+    </div>
+    </form>
+</div>
+
+{% endblock %}
+
+
