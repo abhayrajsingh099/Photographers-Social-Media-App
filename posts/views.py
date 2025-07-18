@@ -13,6 +13,7 @@ def post_create(request):
             new_post = form.save(commit=False)
             new_post.user = request.user # estabilished connection b/w user and post
             new_post.save()
+            return redirect('feed')
     else:
         form = form = PostCreateForm(data=request.GET)
     

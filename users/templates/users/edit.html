@@ -3,6 +3,15 @@
 <div class="flex ml-5 mt-4">
     <h2 class="text-center mt-2 mb-2 font-bold text-xl ">👨🏻 Edit Profile</h2>
 </div>
+<div class="rounded-full flex h-40 w-40 overflow-hidden ml-52 hover:border-gray-900 border-4">
+        {% if profile_photo.photo %}
+        <img src="{{ profile_photo.photo.url }}">
+        {% else %}
+        <img src="https://cdn4.iconfinder.com/data/icons/zoldo-miscellaneous-003/64/user_account_profile_admin-512.png" >
+        {% endif %}
+</div>
+    
+
 
 <div class=" flex ml-6 mt-4">
 <form method="POST" enctype="multipart/form-data" class="">

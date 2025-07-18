@@ -19,7 +19,7 @@
                  <!-- website-items -->
                     {% if request.user.is_authenticated %}
                     <div class="space-x-1 -mb-1">
-                        <!-- <a class="py-4 px-2 text-grey-500 font-semibold " href="">Link 1</a> -->
+                        <a class="py-4 px-2 text-grey-500 font-semibold " href="{% url 'create' %}">➕Post</a>
                          <a class="py-4 px-2 text-grey-500 font-semibold " href="{% url 'edit' %}">Profile</a>
                         <form action="{% url 'logout' %}" method="POST" class="inline">
                             {% csrf_token %}

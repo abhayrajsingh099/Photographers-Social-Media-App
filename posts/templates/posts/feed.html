@@ -19,7 +19,7 @@
          <a href="#">
             <div class="bg-gray-200 my-3 rounded-t-lg shadown-lg border-l-2 border-r-2 border-gray-200 ">
                 <div class="user-container flex p-2">
-                    {% if post.user.photo %}
+                    {% if post.user.profile.photo %}
                     <img src="{{post.user.profile.photo.url}}" alt="" class="h-10 w-10 rounded-full">
                     {% else %}
                     <img src="https://cdn4.iconfinder.com/data/icons/zoldo-miscellaneous-003/64/user_account_profile_admin-512.png" alt="pic" class="h-10 w-10 rounded-full">
