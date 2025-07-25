@@ -59,6 +59,30 @@
                     <p class="text-gray-700 text-base">{{post.caption}}</p>
 
                 </div>
+                <div class="px-5 py-2">
+                    {% for comment in post.comments.all %}
+                    <b>{{comment.posted_by}}</b>:{{ comment.body }}
+                    <br>
+                    {% endfor %}
+                </div>
+                <div class="px-2 py-2">
+                    <form method="POST" class="bg-white  w-2/4 rounded p-2 ">
+                        {% csrf_token %}
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Add comment</label>
+                        </div>
+                        <div class="flex ">
+                            <div class="shadow appearance-none border rounded py-2 px-3  text-sm text-grey-700 mr-2">
+                                {{ comment_form.body }}
+                            </div>
+                            <div>
+                                <input type="hidden" name="post_id" id="post_id" value="{{ post.id }}">
+                                <input type="hidden" name="posted_by" id="post_id" value="{{ logged_user }}">
+                                <button class="bg-purple-500 text-white px-4 py-2 rounded-md text-sm" type="submit">Add </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div> 
          </a>
          <br>
