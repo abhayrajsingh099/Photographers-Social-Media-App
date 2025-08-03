@@ -49,19 +49,25 @@ def register(request):
 
     return render(request,'users/register.html',{'user_form':user_form})
 
+
 @login_required
 def edit(request):
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user,data=request.POST)
         profile_form = ProfileEditForm(instance=request.user.profile,data=request.POST,files=request.FILES)
+        print(user_form,"and->>>>>>",profile_form)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
             return redirect('feed')
+        else:
+            print("User form errors:", user_form.errors)
+            print("Profile form errors:", profile_form.errors)
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
-        profile_photo = Profile.objects.get(user=request.user)
+    
+    profile_photo = Profile.objects.get(user=request.user)
 
     return render(request,'users/edit.html',{'user_form':user_form, 'profile_form':profile_form,'profile_photo':profile_photo})
 
